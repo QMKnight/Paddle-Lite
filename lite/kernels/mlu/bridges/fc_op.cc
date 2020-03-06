@@ -82,7 +82,8 @@ int FCConverter(void* ctx, OpLite* op, KernelBase* kernel) {
                             graph->GetNode(x_var_name)->mlu_tensor(),
                             output_tensor->mlu_tensor(),
                             w_tensor->mlu_tensor(),
-                            bias_tensor ? bias_tensor->mlu_tensor() : nullptr));
+                            bias_tensor ? bias_tensor->mlu_tensor() : nullptr,
+                            CNML_NoSparse));
   graph->SetComputingDataType(
       fc_op, graph->GetNode(x_var_name)->mlu_tensor(), 1 / input_scale);
   auto weight_scale = op_info->GetAttr<std::vector<float>>("weight_scale");

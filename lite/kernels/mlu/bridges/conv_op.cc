@@ -126,7 +126,8 @@ int ConvConverter(void* ctx, OpLite* op, KernelBase* kernel) {
                                   dilations[0],
                                   dilations[1],
                                   paddings[0] * 2,
-                                  paddings[2] * 2));
+                                  paddings[2] * 2,
+                                  CNML_NoSparse));
   std::string bias_var_name;
   std::shared_ptr<MLUTensor> bias_tensor;
   if (HasInputArg(op_info, scope, "Bias")) {

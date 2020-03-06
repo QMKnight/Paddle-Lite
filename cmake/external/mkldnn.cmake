@@ -65,7 +65,7 @@ ExternalProject_Add(
     ${MKLDNN_PROJECT}
     ${EXTERNAL_PROJECT_LOG_ARGS}
     DEPENDS             ${MKLDNN_DEPENDS}
-    GIT_REPOSITORY      "https://github.com/intel/mkl-dnn.git"
+    GIT_REPOSITORY      "/opt/shared/paddle-lite/mkl-dnn"
     GIT_TAG             "863ff6e7042cec7d2e29897fe9f0872e0888b0fc"
     PREFIX              ${MKLDNN_SOURCES_DIR}
     UPDATE_COMMAND      ""
