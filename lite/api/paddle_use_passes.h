@@ -45,4 +45,6 @@ USE_MIR_PASS(memory_optimize_pass);
 USE_MIR_PASS(elementwise_mul_constant_eliminate_pass)
 USE_MIR_PASS(npu_subgraph_pass);
 USE_MIR_PASS(xpu_subgraph_pass);
+USE_MIR_PASS(mlu_subgraph_pass);
+USE_MIR_PASS(mlu_postprocess_pass);
 USE_MIR_PASS(weight_quantization_preprocess_pass);

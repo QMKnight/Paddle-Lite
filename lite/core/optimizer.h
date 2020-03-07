@@ -111,7 +111,11 @@ class Optimizer {
 
            "runtime_context_assign_pass",
            "argument_type_display_pass",
-           "memory_optimize_pass"}};
+           "memory_optimize_pass",
+
+           "mlu_subgraph_pass",
+           "mlu_postprocess_pass"}};
+
       if (passes.size() == 1) {
         passes_local.push_back(passes[0]);
       }
