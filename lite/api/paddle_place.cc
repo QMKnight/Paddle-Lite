@@ -96,6 +96,7 @@ const std::string& TargetRepr(TargetType target) {
                                               "kFPGA",
                                               "kNPU",
                                               "kXPU",
+                                              "kMLU",
                                               "kBM"};
   auto x = static_cast<int>(target);
   CHECK_LT(x, static_cast<int>(TARGET(NUM)));
@@ -138,6 +139,7 @@ std::set<TargetType> ExpandValidTargets(TargetType target) {
                                                TARGET(kNPU),
                                                TARGET(kXPU),
                                                TARGET(kBM),
+                                               TARGET(kMLU),
                                                TARGET(kFPGA)});
   if (target == TARGET(kAny)) {
     return valid_set;

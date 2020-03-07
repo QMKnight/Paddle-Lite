@@ -1089,10 +1089,10 @@ int DeviceInfo::Setup() {
 void DeviceInfo::SetMLURunMode(lite_api::MLUCoreVersion core_version,
                                int core_number) {
   switch (core_version) {
-    case (lite_api::MLUCoreVesion::MLU_220):
+    case (lite_api::MLUCoreVersion::MLU_220):
       mlu_core_version_ = CNML_MLU220;
       break;
-    case (lite_api::MLUCoreVesion::MLU_270):
+    case (lite_api::MLUCoreVersion::MLU_270):
       mlu_core_version_ = CNML_MLU270;
       break;
     default:
@@ -1204,10 +1204,10 @@ void Device<TARGET(kMLU)>::GetInfo() {}
 
 void Device<TARGET(kMLU)>::CreateQueue() {
   exec_queue_.clear();
-  io_queue_clear();
+  io_queue_.clear();
   for (size_t i = 0; i < max_queue_; ++i) {
     cnrtQueue_t exec_queue;
-    cnrtQeueu_t io_queue;
+    cnrtQueue_t io_queue;
     cnrtCreateQueue(&exec_queue);
     cnrtCreateQueue(&io_queue);
     exec_queue_.push_back(exec_queue);

@@ -89,6 +89,8 @@ typedef enum {
   LITE_POWER_RAND_LOW = 5
 } PowerMode;
 
+typedef enum { MLU_220 = 0, MLU_270 = 1 } MLUCoreVersion;
+
 enum class ActivationType : int {
   kIndentity = 0,
   kRelu = 1,

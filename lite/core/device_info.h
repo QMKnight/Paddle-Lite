@@ -111,6 +111,11 @@ class DeviceInfo {
   static thread_local TensorLite workspace_;
   static thread_local int64_t count_;
 
+#ifdef LITE_WITH_MLU
+  static thread_local cnmlCoreVersion_t mlu_core_version_;
+  static thread_local int mlu_core_number_;
+#endif
+
   void SetDotInfo(int argc, ...);
   void SetFP16Info(int argc, ...);
   void SetFP32Info(int argc, ...);
@@ -142,6 +147,9 @@ class Env {
     return *devs;
   }
   static void Init(int max_stream = 4) {
+#ifdef LITE_WITH_MLU
+    CNRT_CALL(cnrtInit(0));
+#endif
     Devs& devs = Global();
     if (devs.size() > 0) {
       return;
