@@ -36,6 +36,7 @@ lite_cc_library(mir_passes
       runtime_context_assign_pass.cc
       memory_optimize_pass.cc
       mlu_postprocess_pass.cc
+      subgraph_cast_display_pass.cc
       weight_quantization_preprocess_pass.cc
   DEPS mir_pass types context ${mir_fusers} ${mir_subgraphs})
 
