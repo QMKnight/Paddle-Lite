@@ -92,7 +92,7 @@ class SubgraphEngine : public subgraph::Engine {
       status |= subgraph::REBUILD_WHEN_SHAPE_CHANGED;
     }
     LOG(INFO) << "START TO CONVERT ";
-    // Convert all of ops and its weights and added into the MLU IR graph
+    // Convert op and its weights and added into the MLU IR graph
     const auto& bridges = subgraph::Registry::Instance();
     for (auto& inst : origin_program_) {
       auto op = inst.op();
