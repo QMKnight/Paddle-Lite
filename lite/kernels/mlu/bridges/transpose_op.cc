@@ -20,8 +20,6 @@ namespace paddle {
 namespace lite {
 namespace subgraph {
 namespace mlu {
-
-
 std::vector<int> axis_to_4d(std::vector<int> axis) {
   if (axis.size() >= 4) {
     return axis;
@@ -74,8 +72,7 @@ int TransposeConverter(void* ctx, OpLite* op, KernelBase* kernel) {
 
   graph->FuseOp(transpose_op_);
   return SUCCESS;
-}  
-
+}
 }  // namespace mlu
 }  // namespace subgraph
 }  // namespace lite
@@ -83,9 +80,6 @@ int TransposeConverter(void* ctx, OpLite* op, KernelBase* kernel) {
 REGISTER_SUBGRAPH_BRIDGE(transpose,
                          kMLU,
                          paddle::lite::subgraph::mlu::TransposeConverter);
-
-                         
 REGISTER_SUBGRAPH_BRIDGE(transpose2,
                          kMLU,
                          paddle::lite::subgraph::mlu::TransposeConverter);
-

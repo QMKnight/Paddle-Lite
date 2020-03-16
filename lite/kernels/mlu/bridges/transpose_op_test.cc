@@ -50,10 +50,8 @@ void transpose_ref(const std::shared_ptr<operators::TransposeOp> op) {
   auto x_dims = input->dims();
   auto y_dims = output->dims();
   auto axis = op_info->GetAttr<std::vector<int>>("axis");
-  
   auto* input_data = input->mutable_data<dtype>();
   auto* output_data = output->mutable_data<dtype>();
-
   int input_n = x_dims[0];
   int input_c = x_dims[1];
   int input_h = x_dims[2];
@@ -71,7 +69,7 @@ void transpose_ref(const std::shared_ptr<operators::TransposeOp> op) {
         }
       }
     }
-  }  
+  }
 }
 
 void test_transpose(const std::vector<int64_t>& input_shape,
@@ -112,13 +110,11 @@ void test_transpose(const std::vector<int64_t>& input_shape,
   for (int i = 0; i < out->dims().production(); i++) {
     EXPECT_NEAR(out_data[i], out_ref_data[i], 1e-2);
   }
-  
 }
 
 TEST(MLUBridges, transpose) {
   std::vector<int64_t> input_shape = {2, 3, 4, 5};
   test_transpose(input_shape, std::vector<int>{0, 1, 3, 2});
-
 }
 
 }  // namespace mlu
