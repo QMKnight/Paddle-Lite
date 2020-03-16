@@ -94,7 +94,7 @@ void test_transpose(const std::vector<int64_t>& input_shape,
   opdesc.SetType("transpose");
   opdesc.SetInput("X", {x_var_name});
   opdesc.SetOutput("Out", {out_var_name});
-  opdesc.SetAttr("axis", axis); 
+  opdesc.SetAttr("axis", axis);
 
   // create and convert op to MLU model, then run it on MLU
   auto op = CreateOp<operators::TransposeOp>(opdesc, &scope);
