@@ -63,7 +63,8 @@ int TransposeConverter(void* ctx, OpLite* op, KernelBase* kernel) {
 
   cnmlNdTransposeOpParam_t transpose_param{nullptr};
 
-  CNML_CALL(cnmlCreateNdTransposeOpParam(&transpose_param, axis_4d.data(), axis_4d.size()));
+  CNML_CALL(cnmlCreateNdTransposeOpParam(
+      &transpose_param, axis_4d.data(), axis_4d.size()));
 
   // Use cnmlCreatexxxOpForward to create op.
   CNML_CALL(cnmlCreateNdTransposeProOp(&transpose_op_,

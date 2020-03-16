@@ -51,7 +51,6 @@ void transpose_ref(const std::shared_ptr<operators::TransposeOp> op) {
   auto y_dims = output->dims();
   auto axis = op_info->GetAttr<std::vector<int>>("axis");
   
-  //auto input_data = input->data<dtype>();
   auto* input_data = input->mutable_data<dtype>();
   auto* output_data = output->mutable_data<dtype>();
 
@@ -75,7 +74,8 @@ void transpose_ref(const std::shared_ptr<operators::TransposeOp> op) {
   }  
 }
 
-void test_transpose(const std::vector<int64_t>& input_shape, std::vector<int> axis) {
+void test_transpose(const std::vector<int64_t>& input_shape,
+                    std::vector<int> axis) {
   // prepare input&output variables
   Scope scope;
   std::string x_var_name = "x";
@@ -105,7 +105,6 @@ void test_transpose(const std::vector<int64_t>& input_shape, std::vector<int> ax
   transpose_ref<float>(op);
   out_ref->CopyDataFrom(*out);
 
-  
   LaunchOp(op, {x_var_name}, {out_var_name});
   // compare results
   auto* out_data = out->mutable_data<float>();
@@ -117,7 +116,7 @@ void test_transpose(const std::vector<int64_t>& input_shape, std::vector<int> ax
 }
 
 TEST(MLUBridges, transpose) {
-  std::vector<int64_t> input_shape = {2,3,4,5};
+  std::vector<int64_t> input_shape = {2, 3, 4, 5};
   test_transpose(input_shape, std::vector<int>{0, 1, 3, 2});
 
 }
