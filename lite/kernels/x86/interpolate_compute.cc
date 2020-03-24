@@ -12,17 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "lite/kernels/x86/yolo_box_compute.h"
+#include "lite/kernels/x86/interpolate_compute.h"
 
-REGISTER_LITE_KERNEL(yolo_box,
+REGISTER_LITE_KERNEL(nearest_interp,
                      kX86,
                      kFloat,
                      kNCHW,
-                     paddle::lite::kernels::x86::YoloBoxCompute,
+                     paddle::lite::kernels::x86::InterpolateCompute,
                      def)
     .BindInput("X", {LiteType::GetTensorTy(TARGET(kX86))})
-    .BindInput("ImgSize",
+    .BindInput("OutSize",
                {LiteType::GetTensorTy(TARGET(kX86), PRECISION(kInt32))})
-    .BindOutput("Boxes", {LiteType::GetTensorTy(TARGET(kX86))})
-    .BindOutput("Scores", {LiteType::GetTensorTy(TARGET(kX86))})
+    .BindInput("SizeTensor",
+               {LiteType::GetTensorTy(TARGET(kX86), PRECISION(kInt32))})
+    .BindInput("Scale", {LiteType::GetTensorTy(TARGET(kX86))})
+    .BindOutput("Out", {LiteType::GetTensorTy(TARGET(kX86))})
     .Finalize();

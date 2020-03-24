@@ -96,7 +96,6 @@ void calc_label_score(T* scores,
   }
 }
 
-template <typename T>
 class YoloBoxCompute : public KernelLite<TARGET(kX86), PRECISION(kFloat)> {
  public:
   using param_t = operators::YoloBoxParam;
@@ -116,12 +115,12 @@ class YoloBoxCompute : public KernelLite<TARGET(kX86), PRECISION(kFloat)> {
 
     auto anchors_data = param.anchors.data();
 
-    const T* X_data = param.X->data<T>();
+    const float* X_data = param.X->data<float>();
     int* ImgSize_data = param.ImgSize->mutable_data<int>();
-    T* Boxes_data = param.Boxes->mutable_data<T>();
-    T* Scores_data = param.Scores->mutable_data<T>();
+    float* Boxes_data = param.Boxes->mutable_data<float>();
+    float* Scores_data = param.Scores->mutable_data<float>();
 
-    T box[4];
+    float box[4];
     for (int i = 0; i < n; i++) {
       int img_height = ImgSize_data[2 * i];
       int img_width = ImgSize_data[2 * i + 1];
@@ -131,7 +130,7 @@ class YoloBoxCompute : public KernelLite<TARGET(kX86), PRECISION(kFloat)> {
           for (int l = 0; l < w; l++) {
             int obj_idx =
                 get_entry_index(i, j, k * w + l, an_num, an_stride, stride, 4);
-            T conf = sigmoid(X_data[obj_idx]);
+            float conf = sigmoid(X_data[obj_idx]);
             if (conf < param.conf_thresh) {
               continue;
             }
