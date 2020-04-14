@@ -1,0 +1,17 @@
+name: C/C++ CI
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: export
+      run: export NEUWARE_HOME=/usr/local/neuware
+    - name: build
+      run: ./lite/tools/build_mlu.sh build
