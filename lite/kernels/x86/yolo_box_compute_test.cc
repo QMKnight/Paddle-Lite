@@ -204,7 +204,7 @@ TEST(yolo_box_x86, run_test) {
   Scores_base.Resize({n, cls, m});
 
   auto x_data = X.mutable_data<float>();
-  auto imgsize_data = ImgSize.mutable_data<float>();
+  auto imgsize_data = ImgSize.mutable_data<int>();
   auto boxes_data = Boxes.mutable_data<float>();
   auto scores_data = Scores.mutable_data<float>();
   auto boxes_base_data = Boxes_base.mutable_data<float>();

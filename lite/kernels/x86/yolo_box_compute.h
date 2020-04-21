@@ -43,9 +43,9 @@ void get_yolo_box(T* box,
                   int stride,
                   int img_height,
                   int img_width) {
-  box[0] = (i + sigmoid(x[index])) * img_height / grid_size;
+  box[0] = (i + sigmoid(x[index])) * img_width / grid_size;
   box[1] = (j + sigmoid(x[index + stride])) * img_height / grid_size;
-  box[2] = std::exp(x[index + stride]) * anchors[2 * an_idx] * img_width /
+  box[2] = std::exp(x[index + 2 * stride]) * anchors[2 * an_idx] * img_width /
            input_size;
   box[3] = std::exp(x[index + 3 * stride]) * anchors[2 * an_idx + 1] *
            img_height / input_size;
