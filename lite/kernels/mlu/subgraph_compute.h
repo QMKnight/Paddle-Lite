@@ -74,8 +74,16 @@ class SubgraphEngine : public subgraph::Engine {
 
   bool InputShapeChanged() {
     std::vector<std::vector<int64_t>> new_shape;
+    char* pPATH;
+    pPATH = std::getenv("BATCH_SIZE_CHANGEBLE");
     for (auto origin_itensor : origin_itensors_) {
-      new_shape.push_back(origin_itensor->dims().Vectorize());
+      if (pPATH != NULL) {
+        auto iv = origin_itensor->dims().Vectorize();
+        iv.erase(iv.begin());
+        new_shape.push_back(iv);
+      } else {
+        new_shape.push_back(origin_itensor->dims().Vectorize());
+      }
     }
     inputs_shape_ = new_shape;
     if (shape_graph_map_.count(inputs_shape_) > 0) {
@@ -99,7 +107,15 @@ class SubgraphEngine : public subgraph::Engine {
       auto input_tensor = scope_->FindMutableTensor(input_name);
 
       origin_itensors_.push_back(input_tensor);
-      new_shape.push_back(input_tensor->dims().Vectorize());
+      char* pPATH;
+      pPATH = std::getenv("BATCH_SIZE_CHANGEBLE");
+      if (pPATH != NULL) {
+        auto iv = input_tensor->dims().Vectorize();
+        iv.erase(iv.begin());
+        new_shape.push_back(iv);
+      } else {
+        new_shape.push_back(input_tensor->dims().Vectorize());
+      }
 
       CHECK(input_tensor);
       auto input_node = graph->AddNode(input_name,

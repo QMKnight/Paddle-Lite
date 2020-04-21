@@ -15,6 +15,7 @@
 #pragma once
 
 #include <cmath>
+#include <cstdlib>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -82,11 +83,29 @@ class Graph {
   void AddInput(std::shared_ptr<MLUTensor> tensor) {
     inputs_.push_back(tensor->mlu_tensor());
     input_tensors_.push_back(tensor);
+    char* pPATH;
+    pPATH = getenv("BATCH_SIZE_CHANGEBLE");
+    if (pPATH != NULL) {
+      int input_dimNb = 4;
+      bool input_dim_mutable[4] = {true, false, false, false};
+      cnmlSetTensorDimMutable(
+          tensor->mlu_tensor(), input_dim_mutable, input_dimNb);
+      // cnmlSetTensorType(tensor->mlu_tensor(), CNML_VARIABLE);
+    }
   }
 
   void AddOutput(std::shared_ptr<MLUTensor> tensor) {
     outputs_.push_back(tensor->mlu_tensor());
     output_tensors_.push_back(tensor);
+    char* pPATH;
+    pPATH = getenv("BATCH_SIZE_CHANGEBLE");
+    if (pPATH != NULL) {
+      int input_dimNb = 4;
+      bool input_dim_mutable[4] = {true, false, false, false};
+      cnmlSetTensorDimMutable(
+          tensor->mlu_tensor(), input_dim_mutable, input_dimNb);
+      // cnmlSetTensorType(tensor->mlu_tensor(), CNML_VARIABLE);
+    }
   }
 
   std::vector<std::shared_ptr<MLUTensor>>* MutableInputs() {
